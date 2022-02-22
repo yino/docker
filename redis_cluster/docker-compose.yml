@@ -4,78 +4,90 @@ services:
     container_name: redis-node-1
     image: redis:latest
     ports:
-      - "6361:6379"
-      - "16361:16379"
+      - "6361:6361"
+      - "16361:16361"
     networks:
       - redisNetwork
     volumes:
       - ./node-1/redis.conf:/usr/local/etc/redis/redis.conf:rw
       - ./node-1/data:/data:rw
+    environment:
+      - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
   redis-node-2:
     container_name: redis-node-2
     image: redis:latest
     ports:
-      - "6362:6379"
-      - "16362:16379"
+      - "6362:6362"
+      - "16362:16362"
     networks:
       - redisNetwork
     volumes:
       - ./node-2/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-2/data:/data:rw
+    environment:
+      - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
   redis-node-3:
     container_name: redis-node-3
     image: redis:latest
     ports:
-      - "6363:6379"
-      - "16363:16379"
+      - "6363:6363"
+      - "16363:16363"
     networks:
       - redisNetwork
     volumes:
       - ./node-3/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-3/data:/data:rw
+    environment:
+      - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
   redis-node-4:
     container_name: redis-node-4
     image: redis:latest
     ports:
-      - "6364:6379"
-      - "16364:16379"
+      - "6364:6364"
+      - "16364:16364"
     networks:
       - redisNetwork
     volumes:
       - ./node-4/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-4/data:/data:rw
+    environment:
+      - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
   redis-node-5:
     container_name: redis-node-5
     image: redis:latest
     ports:
-      - "6365:6379"
-      - "16365:16379"
+      - "6365:6365"
+      - "16365:16365"
     networks:
       - redisNetwork
     volumes:
       - ./node-5/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-5/data:/data:rw
+    environment:
+      - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
   redis-node-6:
     container_name: redis-node-6
     image: redis:latest
     ports:
-      - "6366:6379"
-      - "16366:16379"
+      - "6366:6366"
+      - "16366:16366"
     networks:
       - redisNetwork
     volumes:
       - ./node-6/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-6/data:/data:rw
+    environment:
+      - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
 networks:

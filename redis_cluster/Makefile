@@ -1,10 +1,12 @@
 TARGETS := redis-cluster
 default:
 	@echo "$(TARGETS)"
-run:
+up:
 	docker-compose up
-start:
+run:
 	rm -r ./node-1/data/ ./node-2/data/ ./node-3/data/ ./node-4/data/ ./node-5/data/ ./node-6/data/ && docker-compose up -d --force-recreate
+start:
+	docker-compose up -d --force-recreate
 stop:
 	docker-compose stop
 restart:
