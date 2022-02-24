@@ -8,10 +8,14 @@ services:
       - ./nginx.conf:/root/nginx/nginx.conf
       - ./conf:/root/nginx/conf
       - ./logs:/root/nginx/logs:rw
+      - ./lua:/root/nginx/lua:r
     ports:
       - "9581:80"
-    #    command: bash -c "RUN PATH=/usr/local/openresty/nginx/sbin/nginx -p `pwd`/ -c /root/nginx/nginx.conf"
     command: bash -c "cd ~/nginx && /usr/local/openresty/nginx/sbin/nginx -p `pwd`/ -c nginx.conf -g 'daemon off;'"
-#    command: bash -c "sleep 3600"
+    environment:
+      - REDIS_HOST=10.96.65.220
+      - REDIS_PORT=6361
+      - REDIS_PASS=12345678
+      - REDIS_IPBLACK_KEY=ngx_ip_black_list
     tty: true
     container_name: openresty
