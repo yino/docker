@@ -19,3 +19,6 @@ services:
       - REDIS_IPBLACK_KEY=ngx_ip_black_list
     tty: true
     container_name: openresty
+  openresty-redis:
+    image: redis
+    
