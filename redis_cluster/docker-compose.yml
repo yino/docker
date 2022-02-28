@@ -7,7 +7,9 @@ services:
       - "6361:6361"
       - "16361:16361"
     networks:
-      - redisNetwork
+      testNetwork:
+        ipv4_address: 192.18.0.2
+
     volumes:
       - ./node-1/redis.conf:/usr/local/etc/redis/redis.conf:rw
       - ./node-1/data:/data:rw
@@ -15,6 +17,7 @@ services:
       - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+
   redis-node-2:
     container_name: redis-node-2
     image: redis:latest
@@ -22,7 +25,8 @@ services:
       - "6362:6362"
       - "16362:16362"
     networks:
-      - redisNetwork
+      testNetwork:
+        ipv4_address: 192.18.0.3
     volumes:
       - ./node-2/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-2/data:/data:rw
@@ -30,6 +34,7 @@ services:
       - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+
   redis-node-3:
     container_name: redis-node-3
     image: redis:latest
@@ -37,7 +42,8 @@ services:
       - "6363:6363"
       - "16363:16363"
     networks:
-      - redisNetwork
+      testNetwork:
+        ipv4_address: 192.18.0.4
     volumes:
       - ./node-3/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-3/data:/data:rw
@@ -45,6 +51,7 @@ services:
       - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+
   redis-node-4:
     container_name: redis-node-4
     image: redis:latest
@@ -52,7 +59,8 @@ services:
       - "6364:6364"
       - "16364:16364"
     networks:
-      - redisNetwork
+      testNetwork:
+        ipv4_address: 192.18.0.5
     volumes:
       - ./node-4/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-4/data:/data:rw
@@ -60,6 +68,7 @@ services:
       - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+
   redis-node-5:
     container_name: redis-node-5
     image: redis:latest
@@ -67,7 +76,8 @@ services:
       - "6365:6365"
       - "16365:16365"
     networks:
-      - redisNetwork
+      testNetwork:
+        ipv4_address: 192.18.0.6
     volumes:
       - ./node-5/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-5/data:/data:rw
@@ -75,6 +85,7 @@ services:
       - TZ=Asia/Shanghai
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+
   redis-node-6:
     container_name: redis-node-6
     image: redis:latest
@@ -82,7 +93,8 @@ services:
       - "6366:6366"
       - "16366:16366"
     networks:
-      - redisNetwork
+      testNetwork:
+        ipv4_address: 192.18.0.7
     volumes:
       - ./node-6/redis.conf:/usr/local/etc/redis/redis.conf
       - ./node-6/data:/data:rw
@@ -91,4 +103,8 @@ services:
     command:
       /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
 networks:
-  redisNetwork:
+  testNetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.18.0.0/16

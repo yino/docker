@@ -8,6 +8,11 @@ services:
       - ./nginx.conf:/root/nginx/nginx.conf
       - ./conf:/root/nginx/conf
       - ./logs:/root/nginx/logs:rw
+    entrypoint:
+      - REDIS_HOST:10.96.65.24
+      - REDIS_PORT:6361
+      - REDIS_PASS:12345678
+      - REDIS_IPBLACK_KEY:ngx_ipblack_list
     ports:
       - "9581:80"
     #    command: bash -c "RUN PATH=/usr/local/openresty/nginx/sbin/nginx -p `pwd`/ -c /root/nginx/nginx.conf"

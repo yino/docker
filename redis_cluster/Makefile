@@ -19,5 +19,8 @@ bash:
 log:
 	docker-compose logs
 
-deleteConf:
+clearConf:
 	rm -r ./node-1/data/ ./node-2/data/ ./node-3/data/ ./node-4/data/ ./node-5/data/ ./node-6/data/
+
+network:
+	docker inspect -f "{{.Name}} - {{.NetworkSettings.Networks.redis_cluster_redisNetwork.IPAddress }}" $(docker ps -aq)
