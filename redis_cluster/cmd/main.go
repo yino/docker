@@ -11,7 +11,7 @@ import (
 type Cache interface {
 	Get(key string) (string, error)
 	Set(key string, value interface{}, expireTime time.Duration) (string, error)
-	Ping()  (string, error)
+	Ping() (string, error)
 }
 
 type Redis struct {
@@ -30,7 +30,7 @@ func (r *Redis) Ping() (string, error) {
 	return r.Cluster.Ping(r.Ctx).Result()
 }
 
-func NewRedisCluster() *Redis {
+func NewRedisCluster() Cache {
 	Cluster := redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs: []string{
 			"127.0.0.1:6361",
@@ -40,13 +40,13 @@ func NewRedisCluster() *Redis {
 			"127.0.0.1:6365",
 			"127.0.0.1:6366",
 		},
-		MaxRedirects:8,
-		ReadOnly: true,
+		MaxRedirects:   8,
+		ReadOnly:       true,
 		RouteByLatency: true,
-		DialTimeout:  100 * time.Microsecond,
-		ReadTimeout:  100 * time.Microsecond,
-		WriteTimeout: 100 * time.Microsecond,
-		Password: "12345678",
+		DialTimeout:    100 * time.Microsecond,
+		ReadTimeout:    100 * time.Microsecond,
+		WriteTimeout:   100 * time.Microsecond,
+		Password:       "12345678",
 	})
 
 	ctx := context.Background()
@@ -56,7 +56,7 @@ func NewRedisCluster() *Redis {
 	}
 }
 
-func main(){
+func main() {
 	redisClu := NewRedisCluster()
 	//fmt.Println(redisClu.Set("test_key","1008",5000))
 	//fmt.Println(redisClu.Get("test_key"))

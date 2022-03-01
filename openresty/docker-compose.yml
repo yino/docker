@@ -1,22 +1,23 @@
-version: "2"
+version: "3"
 services:
   openresty:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
+      - /etc/localtime:/etc/localtime:ro #将外边时间直接挂载到容器内部，权限只读
+      - /etc/timezone:/etc/timezone:ro #将外面的时间挂载到容器内部，权限只读，容器内不可修改
       - ./nginx.conf:/root/nginx/nginx.conf
       - ./conf:/root/nginx/conf
-      - ./logs:/root/nginx/logs:rw
-    entrypoint:
-      - REDIS_HOST:10.96.65.24
-      - REDIS_PORT:6361
-      - REDIS_PASS:12345678
-      - REDIS_IPBLACK_KEY:ngx_ipblack_list
+      - ./logs:/root/nginx/logs
+      - ./lua:/root/nginx/lua:rw
+    environment:
+      - REDIS_HOST=10.96.65.24
+      - REDIS_PORT=6363
+      - REDIS_PASS=12345678
+      - REDIS_IPBLACK_KEY=ngx_ipblack_list
     ports:
       - "9581:80"
-    #    command: bash -c "RUN PATH=/usr/local/openresty/nginx/sbin/nginx -p `pwd`/ -c /root/nginx/nginx.conf"
-    command: bash -c "cd ~/nginx && /usr/local/openresty/nginx/sbin/nginx -p `pwd`/ -c nginx.conf -g 'daemon off;'"
-#    command: bash -c "sleep 3600"
+    command: bash -c "/usr/local/openresty/nginx/sbin/nginx -p `pwd`/ -c nginx.conf -g 'daemon off;'"
     tty: true
     container_name: openresty
