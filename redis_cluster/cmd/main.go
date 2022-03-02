@@ -33,12 +33,12 @@ func (r *Redis) Ping() (string, error) {
 func NewRedisCluster() Cache {
 	Cluster := redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs: []string{
-			"127.0.0.1:6361",
-			"127.0.0.1:6362",
-			"127.0.0.1:6363",
-			"127.0.0.1:6364",
-			"127.0.0.1:6365",
-			"127.0.0.1:6366",
+			"192.18.0.2:6361",
+			"192.18.0.3:6362",
+			"10.96.65.24:6363",
+			"10.96.65.24:6364",
+			"10.96.65.24:6365",
+			"10.96.65.24:6366",
 		},
 		MaxRedirects:   8,
 		ReadOnly:       true,
